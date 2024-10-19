@@ -1,0 +1,79 @@
+@startuml
+package "PortalApp" {
+
+    package "Model" {
+        class Producto {
+            +id: int
+            +nombre: string
+            +precio: float
+            +stock: int
+        }
+
+        class Venta {
+            +id: int
+            +fecha: datetime
+            +cliente: string
+            +productos: List<Producto>
+            +total: float
+        }
+
+        class Deuda {
+            +id: int
+            +cliente: string
+            +monto: float
+            +fechaVencimiento: datetime
+        }
+
+        class Reporte {
+            +generarReporteInventario(): string
+            +generarReporteVentas(): string
+            +generarReporteDeudas(): string
+        }
+    }
+
+    package "View" {
+        class InterfazUsuario {
+            +mostrarInventario(): void
+            +mostrarVentas(): void
+            +mostrarDeudas(): void
+            +mostrarReportes(): void
+        }
+    }
+
+    package "Controller" {
+        class InventarioController {
+            +agregarProducto(): void
+            +actualizarStock(): void
+        }
+
+        class VentasController {
+            +registrarVenta(): void
+            +generarRecibo(): void
+        }
+
+        class DeudasController {
+            +gestionarDeudores(): void
+            +enviarRecordatorio(): void
+        }
+
+        class ReportesController {
+            +mostrarReporteInventario(): string
+            +mostrarReporteVentas(): string
+            +mostrarReporteDeudas(): string
+        }
+    }
+
+    Model --> Controller
+    Controller --> View
+
+    InventarioController --> Producto
+    VentasController --> Venta
+    DeudasController --> Deuda
+    ReportesController --> Reporte
+
+    InterfazUsuario --> InventarioController : "Interacción"
+    InterfazUsuario --> VentasController : "Interacción"
+    InterfazUsuario --> DeudasController : "Interacción"
+    InterfazUsuario --> ReportesController : "Generar reportes"
+}
+@enduml
