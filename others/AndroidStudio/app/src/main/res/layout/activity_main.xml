@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!-- Contenedor para la búsqueda -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#8F0303"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="40dp"
+            android:gravity="center"
+            android:text="Buscador Musical"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
+
+        <EditText
+            android:id="@+id/txtSearchTerm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:ems="10"
+            android:hint="@string/search_hint"
+            android:inputType="textPersonName"
+            android:padding="12dp" />
+        <!--        android:layout_weight="1"-->
+
+
+        <!--    <LinearLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:orientation="horizontal">-->
+
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0"
+            android:text="@string/search_button" />
+
+        <ListView
+            android:id="@+id/livTracks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+<!--    </LinearLayout>-->
+
+
+<!--    </ListView>-->
+
+<!--</LinearLayout>-->
+
+<!-- Suponiendo que este es un elemento para una lista o RecyclerView -->
+
+
+<!-- Aquí puedes añadir más componentes de la interfaz de usuario como RecyclerView, ProgressBar, etc. -->
+
+<!--    <ListView-->
+<!--        android:id="@+id/lvTrackList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/btnSearch"-->
+<!--        android:divider="@android:color/darker_gray"-->
+<!--        android:dividerHeight="0.5dp" />-->
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:indeterminate="true"-->
+<!--        android:visibility="gone" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    tools:context=".MainActivity">-->
+
+    <!--    &lt;!&ndash; Contenedor para la búsqueda &ndash;&gt;-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/txtSearchTerm"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:hint="@string/search_hint" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnSearch"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/search_button" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    &lt;!&ndash; Suponiendo que este es un elemento para una lista o RecyclerView &ndash;&gt;-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingEnd="20dp"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/imgArtwork"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imgArtwork"-->
+    <!--            android:layout_width="50dp"-->
+    <!--            android:layout_height="50dp" />-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:paddingStart="10dp">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/lblTrackName"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0dp"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:text="Track Name" />-->
+
+    <!--            &lt;!&ndash; Añadir más vistas aquí si es necesario, por ejemplo, un subtítulo o una descripción &ndash;&gt;-->
+    <!--        </LinearLayout>-->
+
+    <!--        <ProgressBar-->
+    <!--            android:id="@+id/progressBar"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_centerInParent="true"-->
+    <!--            android:indeterminate="true"-->
+    <!--            android:visibility="gone" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    &lt;!&ndash; Aquí puedes añadir más componentes de la interfaz de usuario como RecyclerView, ProgressBar, etc. &ndash;&gt;-->
+
+    <!--&lt;!&ndash;    <ListView&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:id="@+id/lvTrackList"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_below="@id/btnSearch"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:divider="@android:color/darker_gray"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:dividerHeight="0.5dp" />&ndash;&gt;-->
+
+
+
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

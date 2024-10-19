@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MusicProject</string>
+    <string name="search_hint">Pista</string>
+    <string name="search_button">Buscar</string>
+</resources>
