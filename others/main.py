@@ -3,6 +3,8 @@ from flet import TextStyle
 import random
 
 def main(page: ft.Page):
+    page.bgcolor = ft.colors.PINK_600  # Cambiar el color de fondo de la página
+
     # Tu nombre y apellidos
     nombre = "Seider"
     apellido1 = "Sanin"
