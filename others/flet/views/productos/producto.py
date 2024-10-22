@@ -3,7 +3,6 @@ import flet as ft
 from data.manager import DataManager
 
 
-# Nuevo estilo: Usando funciones para crear controles personalizados
 def create_productos(page: ft.Page, data_manager: DataManager):
     def handle_add_producto(e):
         modal = ft.AlertDialog(
@@ -115,7 +114,3 @@ def create_productos(page: ft.Page, data_manager: DataManager):
 
     refresh_productos()
     return view
-
-
-# [Comentario: views/ventas.py seguiría un patrón similar]
-# [Comentario: views/deudores.py seguiría un patrón similar]

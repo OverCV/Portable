@@ -2,7 +2,6 @@
 import flet as ft
 from data.manager import DataManager
 from views.productos.producto import create_productos
-# [Importar otras vistas...]
 
 
 class InventoryApp:
@@ -47,10 +46,6 @@ class InventoryApp:
                 page.views.append(
                     create_productos(page, self.data_manager)
                 )
-            # elif route == "/ventas":
-            #     page.views.append(create_ventas_view(page, self.data_manager))
-            # elif route == "/deudores":
-            #     page.views.append(create_deudores_view(page, self.data_manager))
 
             # Agregar la barra de navegación a todas las vistas
             page.views[-1].navigation_bar = nav_rail
@@ -60,7 +55,6 @@ class InventoryApp:
         await page.go_async("/productos")  # Ruta inicial
 
     def navigation_changed(self, e):
-        # routes = ["/productos", "/ventas", "/deudores"]
         routes = ["/productos"]
         e.page.go(routes[e.control.selected_index])
 

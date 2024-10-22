@@ -1,32 +1,31 @@
 @startuml
 class Vendedor {
-    +nombre: string
-    +email: string
+    ' +nombre: string
+    ' +email: string
 }
 
 class Cliente {
-    +nombre: string
-    +email: string
+    ' +nombre: string
+    ' +email: string
 }
 
 class Producto {
-    +nombre: string
-    +precio: float
-    +stock: int
+    ' +nombre: string
+    ' +precio: float
+    ' +stock: int
 }
 
 class Venta {
-    +fecha: datetime
-    +total: float
+    ' +fecha: datetime
+    ' +total: float
 }
 
 class Deuda {
-    +monto: float
-    +fechaVencimiento: datetime
+    ' +monto: float
 }
 
 class Reporte {
-    +generarReporte(): string
+    ' +generarReporte(): string
 }
 
 ' Relaciones con cardinalidad

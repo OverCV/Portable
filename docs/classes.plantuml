@@ -21,11 +21,10 @@ package "PortalApp" {
             +id: int
             +cliente: string
             +monto: float
-            +fechaVencimiento: datetime
         }
 
         class Reporte {
-            +generarReporteInventario(): string
+            ' +generarReporteInventario(): string
             +generarReporteVentas(): string
             +generarReporteDeudas(): string
         }
@@ -41,23 +40,26 @@ package "PortalApp" {
     }
 
     package "Controller" {
+
+        class VentasController {
+            +registrarVenta(): void
+            +ObtenerTotalMensual(): List<Venta>
+        }
+
         class InventarioController {
             +agregarProducto(): void
             +actualizarStock(): void
         }
 
-        class VentasController {
-            +registrarVenta(): void
-            +generarRecibo(): void
-        }
 
         class DeudasController {
             +gestionarDeudores(): void
-            +enviarRecordatorio(): void
+            +crearRecordatorio(): void
+            +ObtenerVentas(): List<Venta>
         }
 
         class ReportesController {
-            +mostrarReporteInventario(): string
+            ' +mostrarReporteInventario(): string
             +mostrarReporteVentas(): string
             +mostrarReporteDeudas(): string
         }
@@ -69,6 +71,8 @@ package "PortalApp" {
     InventarioController --> Producto
     VentasController --> Venta
     DeudasController --> Deuda
+    ' ReportesController --> VentasController
+    ' ReportesController --> DeudasController
     ReportesController --> Reporte
 
     InterfazUsuario --> InventarioController : "Interacción"
