@@ -1,0 +1,83 @@
+@startuml
+package "PortalApp" {
+
+    package "Model" {
+        class Producto {
+            +id: int
+            +nombre: string
+            +precio: float
+            +stock: int
+        }
+
+        class Venta {
+            +id: int
+            +fecha: datetime
+            +cliente: string
+            +productos: List<Producto>
+            +total: float
+        }
+
+        class Deuda {
+            +id: int
+            +cliente: string
+            +monto: float
+        }
+
+        class Reporte {
+            ' +generarReporteInventario(): string
+            +generarReporteVentas(): string
+            +generarReporteDeudas(): string
+        }
+    }
+
+    package "View" {
+        class InterfazUsuario {
+            +mostrarInventario(): void
+            +mostrarVentas(): void
+            +mostrarDeudas(): void
+            +mostrarReportes(): void
+        }
+    }
+
+    package "Controller" {
+
+        class VentasController {
+            +registrarVenta(): void
+            +ObtenerTotalMensual(): List<Venta>
+        }
+
+        class InventarioController {
+            +agregarProducto(): void
+            +actualizarStock(): void
+        }
+
+
+        class DeudasController {
+            +gestionarDeudores(): void
+            +crearRecordatorio(): void
+            +ObtenerVentas(): List<Venta>
+        }
+
+        class ReportesController {
+            ' +mostrarReporteInventario(): string
+            +mostrarReporteVentas(): string
+            +mostrarReporteDeudas(): string
+        }
+    }
+
+    Model --> Controller
+    Controller --> View
+
+    InventarioController --> Producto
+    VentasController --> Venta
+    DeudasController --> Deuda
+    ' ReportesController --> VentasController
+    ' ReportesController --> DeudasController
+    ReportesController --> Reporte
+
+    InterfazUsuario --> InventarioController : "Interacción"
+    InterfazUsuario --> VentasController : "Interacción"
+    InterfazUsuario --> DeudasController : "Interacción"
+    InterfazUsuario --> ReportesController : "Generar reportes"
+}
+@enduml
