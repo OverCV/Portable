@@ -5,19 +5,21 @@ from typing import List, Dict, Any
 from datetime import datetime
 from backend.data.manager import Manager
 
+from backend.app.enums.application import Portalapp
 from backend.app.enums.reports import Reports
+from backend.app.enums.manager import CSVModels
 
 
 class CSVManager(Manager):
     def __init__(self):
-        # Directorio base para los archivos CSV
-        self.data_dir = Path('backend/data/base')
+        # Directorio base para los archivos
+        self.data_dir = Path(Portalapp.DATABASE_PATH)
         self.data_dir.mkdir(exist_ok=True)
 
         # Rutas de los archivos
-        self.productos_file = self.data_dir / 'productos.csv'
-        self.ventas_file = self.data_dir / 'ventas.csv'
-        self.deudores_file = self.data_dir / 'deudores.csv'
+        self.productos_file = self.data_dir / CSVModels.PRODUCTOS
+        self.ventas_file = self.data_dir / CSVModels.VENTAS
+        self.deudores_file = self.data_dir / CSVModels.DEUDORES
 
         # Inicializar archivos CSV con columnas si no existen
         self._init_files()
@@ -62,9 +64,3 @@ class CSVManager(Manager):
             self._write_file(file_path, data)
             return item
         raise ValueError(f"Source '{source}' not recognized.")
-
-    # def get_productos(self):
-    #     return self.get_data('productos')
-
-    # def add_producto(self, producto: Dict):
-    #     return self.add_data('productos', producto)
