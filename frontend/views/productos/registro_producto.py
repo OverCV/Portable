@@ -37,7 +37,7 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                 tight=True,
             ),
             actions=[
-                fl.TextButton('Cancelar', on_click=lambda _: setattr(modal, 'open', False)),
+                fl.TextButton('Cancelar', on_click=lambda _: (setattr(modal, 'open', False), page.update())),
                 fl.TextButton('Guardar', on_click=lambda _: save_producto()),
             ],
         )
@@ -89,7 +89,7 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                     tight=True,
                 ),
                 actions=[
-                    fl.TextButton('Cancelar', on_click=lambda _: setattr(modal, 'open', False)),
+                    fl.TextButton('Cancelar', on_click=lambda _: (setattr(modal, 'open', False), page.update())),
                     fl.TextButton('Guardar', on_click=lambda _: save_edited_producto()),
                 ],
             )
@@ -130,7 +130,9 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                                 fl.IconButton(
                                     icon=fl.icons.DELETE,
                                     tooltip='Eliminar',
-                                    on_click=lambda e: (delete_producto(data_manager, producto['id']), refresh_productos()),
+                                    on_click=lambda e: (
+                                        delete_producto(data_manager, producto['id']), refresh_productos(),
+                                    )
                                 ),
                             ],
                             alignment=fl.MainAxisAlignment.END,
@@ -143,7 +145,7 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
         return view
 
 
-    productos_list = fl.ListView(
+    productos_list: fl.ListView = fl.ListView(
         spacing=10,
         padding=20,
         expand=True,
