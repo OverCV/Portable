@@ -1,7 +1,5 @@
 @startuml
 actor Vendedor
-' actor Cliente
-' actor Proveedor
 
 rectangle "PortalApp" {
   usecase "Registrar Productos" as UC1

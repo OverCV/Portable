@@ -14,7 +14,7 @@ class InventoryApp:
         page.window.width = 400
         page.window.height = 800
 
-        # Bottom Navigation
+        # Bottom Navigation #
         nav_rail = fl.NavigationBar(
             selected_index=0,
             destinations=[
