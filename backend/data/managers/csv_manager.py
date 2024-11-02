@@ -58,9 +58,30 @@ class CSVManager(Manager):
         file_path = getattr(self, f'{source}_file', None)
         if file_path:
             data = self._read_file(file_path)
-            item['id'] = str(len(data) + 1)
-            item['creacion'] = datetime.now().isoformat()
+            item['id'] = (len(data) + 1)
+            ##item['creacion'] = datetime.now().isoformat()
             data.append(item)
             self._write_file(file_path, data)
             return item
         raise ValueError(f"Source '{source}' not recognized.")
+
+    def put_data(self, source: str, id_source: int, new_source: dict):
+        file_path = getattr(self, f'{source}_file', None)
+        if file_path:
+            data = self._read_file(file_path)
+            for row in data:
+                if row['id'] == id_source:
+                    row.update(new_source)
+                    self._write_file(file_path, data)
+                    return row
+        raise ValueError(f"Source '{source}' not recognized.")
+
+    def delete_data(self, source: str, id_source: int):
+        file_path = getattr(self, f'{source}_file', None)
+        if file_path:
+            data = self._read_file(file_path)
+            data = [row for row in data if row['id'] != id_source]
+            self._write_file(file_path, data)
+            return True
+        raise ValueError(f"Source '{source}' not recognized.")
+    

@@ -1,1 +1,2 @@
-id,nombre,descripcion,creacion
+nombre,precio,cantidad,id
+Paleta,2000.0,4,2

@@ -1,8 +1,9 @@
+from typing import Callable
 import flet as fl
 from backend.data.managers.csv_manager import CSVManager
 from frontend.enums.routes import Routes
 
-from frontend.views.productos.registro_producto import create_productos
+from frontend.views.productos.registro_producto import process_productos
 from frontend.views.ventas.registro_venta import create_ventas
 from frontend.views.home.inicio import mostrar_inicio
 from frontend.views.deudores.mostrar_deudores import mostrar_deudores
@@ -61,9 +62,9 @@ class InventoryApp:
 
             print(f'{route=}')
 
-            all_routes = {
+            all_routes: dict[str, Callable] = {
                 Routes.HOME: mostrar_inicio,
-                Routes.PRODUCTOS: create_productos,
+                Routes.PRODUCTOS: process_productos,
                 Routes.VENTAS: create_ventas,
                 Routes.DEUDORES: mostrar_deudores,
             }
