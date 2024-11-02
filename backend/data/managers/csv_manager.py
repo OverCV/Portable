@@ -63,8 +63,8 @@ class CSVManager(Manager):
             return item
         raise ValueError(f"Source '{source}' not recognized.")
 
-    def get_productos(self):
-        return self.get_data('productos')
+    # def get_productos(self):
+    #     return self.get_data('productos')
 
-    def add_producto(self, producto: Dict):
-        return self.add_data('productos', producto)
+    # def add_producto(self, producto: Dict):
+    #     return self.add_data('productos', producto)
