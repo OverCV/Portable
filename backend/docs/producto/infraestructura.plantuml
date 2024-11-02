@@ -1,0 +1,31 @@
+@startuml
+package "Infraestructura de PortalApp" {
+
+    node "Dispositivo Móvil" {
+        [PortalApp (Flet)]
+        [Interfaz de Usuario]
+    }
+
+    node "Servidor Local" {
+        [Controladores de Negocio]
+        [Gestión de Inventario]
+        [Gestión de Ventas]
+        [Gestión de Deudas]
+    }
+
+    database "Base de Datos Local" {
+        [Inventario]
+        [Ventas]
+        [Deudas]
+    }
+
+    [PortalApp (Flet)] --> [Interfaz de Usuario] : Interacción de usuario
+    [Interfaz de Usuario] --> [Controladores de Negocio] : Lógica de negocio
+    [Controladores de Negocio] --> [Gestión de Inventario] : Consultas/Actualizaciones
+    [Controladores de Negocio] --> [Gestión de Ventas] : Consultas/Actualizaciones
+    [Controladores de Negocio] --> [Gestión de Deudas] : Consultas/Actualizaciones
+    [Gestión de Inventario] --> [Base de Datos Local] : Leer/Escribir inventario
+    [Gestión de Ventas] --> [Base de Datos Local] : Leer/Escribir ventas
+    [Gestión de Deudas] --> [Base de Datos Local] : Leer/Escribir deudas
+}
+@enduml
