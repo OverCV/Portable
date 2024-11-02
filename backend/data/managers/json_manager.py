@@ -6,7 +6,7 @@ from typing import Dict, List, Any
 from datetime import datetime
 
 
-class DataManager:
+class JSONManager:
     def __init__(self):
         self.data_dir = Path("data")
         self.data_dir.mkdir(exist_ok=True)

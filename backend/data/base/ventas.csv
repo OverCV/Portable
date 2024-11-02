@@ -1,1 +1,1 @@
-id,product_id,quantity,sale_date
+id,id_producto,cantidad,fecha_venta,ganancia
