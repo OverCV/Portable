@@ -16,7 +16,6 @@ from frontend.enums.config import conf
 class Portalapp:
     def __init__(self):
         self.sql_manager = CSVManager()
-        # self.nosql_manager = JSONManager()
 
     async def main(self, page: fl.Page):
         page.title = conf.APP_NAME
@@ -43,16 +42,16 @@ class Portalapp:
                     selected_icon=fl.icons.SHOPPING_CART,
                     label='Ventas',
                 ),
-                fl.NavigationBarDestination(
-                    icon=fl.icons.PEOPLE_OUTLINED,
-                    selected_icon=fl.icons.PEOPLE,
-                    label='Deudores',
-                ),
-                fl.NavigationBarDestination(
-                    icon=fl.icons.QUERY_STATS_OUTLINED,
-                    selected_icon=fl.icons.QUERY_STATS_ROUNDED,
-                    label='Reportes',
-                ),
+                # fl.NavigationBarDestination(
+                #     icon=fl.icons.PEOPLE_OUTLINED,
+                #     selected_icon=fl.icons.PEOPLE,
+                #     label='Deudores',
+                # ),
+                # fl.NavigationBarDestination(
+                #     icon=fl.icons.QUERY_STATS_OUTLINED,
+                #     selected_icon=fl.icons.QUERY_STATS_ROUNDED,
+                #     label='Reportes',
+                # ),
             ],
             on_change=self.navigation_changed,
         )

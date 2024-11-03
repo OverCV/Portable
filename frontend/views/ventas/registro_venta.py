@@ -1,5 +1,3 @@
-# frontend/views/ventas.py
-
 import flet as fl
 from frontend.controllers.ventas import VentasController
 

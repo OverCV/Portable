@@ -1,8 +1,7 @@
-# data/csv_manager.py
+
 import csv
 from pathlib import Path
 from typing import List, Dict, Any
-from datetime import datetime
 from backend.data.manager import Manager
 
 from backend.app.enums.application import Portalapp
@@ -63,7 +62,6 @@ class CSVManager(Manager):
             data = self._read_file(file_path)
             last_id: int = data[-1]['id'] if data else 0
             item['id'] = int(last_id) + 1
-            ##item['creacion'] = datetime.now().isoformat()
             data.append(item)
             self._write_file(file_path, data)
             return item
