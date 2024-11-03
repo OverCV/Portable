@@ -27,12 +27,10 @@ class CSVManager(Manager):
 
     def _init_files(self):
         default_columns = {
-            self.productos_file: ['id', 'nombre', 'descripcion', 'creacion'],
-
+            self.productos_file: ['id', 'nombre', 'precio', 'stock'],
             # Actualizamos para solo contener la venta
             self.ventas_file: ['id', 'fecha_venta', 'ganancia'],
             self.venta_productos_file: ['id_venta', 'id_producto', 'cantidad'],
-
             self.deudores_file: ['id', 'nombre_cliente', 'valor_deuda', 'creacion'],
         }
         for file, columns in default_columns.items():
@@ -63,7 +61,9 @@ class CSVManager(Manager):
         file_path = getattr(self, f'{source}_file', None)
         if file_path:
             data = self._read_file(file_path)
-            item['id'] = len(data) + 1
+            last_id: int = data[-1]['id'] if data else 0
+            item['id'] = int(last_id) + 1
+            ##item['creacion'] = datetime.now().isoformat()
             data.append(item)
             self._write_file(file_path, data)
             return item
