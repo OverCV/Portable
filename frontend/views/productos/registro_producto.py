@@ -29,15 +29,17 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                         ref=(precio_ref := fl.Ref[fl.TextField]()),
                     ),
                     fl.TextField(
-                        label='Cantidad',
+                        label='Stock',
                         keyboard_type=fl.KeyboardType.NUMBER,
-                        ref=(cantidad_ref := fl.Ref[fl.TextField]()),
+                        ref=(stock_ref := fl.Ref[fl.TextField]()),
                     ),
                 ],
                 tight=True,
             ),
             actions=[
-                fl.TextButton('Cancelar', on_click=lambda _: (setattr(modal, 'open', False), page.update())),
+                fl.TextButton(
+                    'Cancelar', on_click=lambda _: (setattr(modal, 'open', False), page.update())
+                ),
                 fl.TextButton('Guardar', on_click=lambda _: save_producto()),
             ],
         )
@@ -46,14 +48,14 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
             nuevo_producto = {
                 'nombre': nombre_ref.current.value,
                 'precio': float(precio_ref.current.value),
-                'cantidad': int(cantidad_ref.current.value),
+                'stock': int(stock_ref.current.value),
             }
             add_producto(data_manager, nuevo_producto)
             modal.open = False
             page.update()
             refresh_productos()
 
-        page.dialog = modal
+        page.overlay.append(modal)
         modal.open = True
         page.update()
 
@@ -80,16 +82,19 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                             ref=(precio_ref := fl.Ref[fl.TextField]()),
                         ),
                         fl.TextField(
-                            label='Cantidad',
-                            value=str(producto['cantidad']),
+                            label='Stock',
+                            value=str(producto['stock']),
                             keyboard_type=fl.KeyboardType.NUMBER,
-                            ref=(cantidad_ref := fl.Ref[fl.TextField]()),
+                            ref=(stock_ref := fl.Ref[fl.TextField]()),
                         ),
                     ],
                     tight=True,
                 ),
                 actions=[
-                    fl.TextButton('Cancelar', on_click=lambda _: (setattr(modal, 'open', False), page.update())),
+                    fl.TextButton(
+                        'Cancelar',
+                        on_click=lambda _: (setattr(modal, 'open', False), page.update()),
+                    ),
                     fl.TextButton('Guardar', on_click=lambda _: save_edited_producto()),
                 ],
             )
@@ -98,7 +103,7 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                 edited_producto = {
                     'nombre': nombre_ref.current.value,
                     'precio': float(precio_ref.current.value),
-                    'cantidad': int(cantidad_ref.current.value),
+                    'stock': int(stock_ref.current.value),
                 }
                 put_producto(data_manager, producto['id'], edited_producto)
                 modal.open = False
@@ -117,7 +122,7 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                             leading=fl.Icon(fl.icons.INVENTORY),
                             title=fl.Text(producto['nombre'], size=16),
                             subtitle=fl.Text(
-                                f"Precio: ${producto['precio']} - Stock: {producto['cantidad']}"
+                                f"Precio: ${producto['precio']} - Stock: {producto['stock']}"
                             ),
                         ),
                         fl.Row(
@@ -131,8 +136,9 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
                                     icon=fl.icons.DELETE,
                                     tooltip='Eliminar',
                                     on_click=lambda e: (
-                                        delete_producto(data_manager, producto['id']), refresh_productos(),
-                                    )
+                                        delete_producto(data_manager, producto['id']),
+                                        refresh_productos(),
+                                    ),
                                 ),
                             ],
                             alignment=fl.MainAxisAlignment.END,
@@ -143,7 +149,6 @@ def process_productos(page: fl.Page, data_manager: CSVManager):
             ),
         )
         return view
-
 
     productos_list: fl.ListView = fl.ListView(
         spacing=10,

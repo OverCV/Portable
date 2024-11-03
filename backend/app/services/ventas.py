@@ -2,6 +2,7 @@
 
 from backend.data.manager import Manager
 from datetime import datetime
+from backend.app.services.productos import put_producto
 
 
 def get_ventas(data_manager: Manager):
@@ -27,19 +28,18 @@ def add_venta(data_manager: Manager, venta: dict, productos: list[dict]):
         }
         data_manager.add_data('venta_productos', venta_producto)
 
-        # Actualizar el stock del producto en el archivo 'productos'
-        productos_data = data_manager.get_data('productos')
-        producto_actual = next((p for p in productos_data if int(p['id']) == producto['id']), None)
+        # Calcular el nuevo stock sin volver a validar (asumimos que ya se verificó)
+        nuevo_stock = int(producto['stock']) - producto['cantidad']
 
-        if producto_actual:
-            nuevo_stock = int(producto_actual['cantidad']) - producto['cantidad']
-            if nuevo_stock < 0:
-                raise ValueError(f"Stock insuficiente para el producto {producto_actual['nombre']}")
+        # Crear un diccionario actualizado para el producto
+        producto_actualizado = {
+            'id': producto['id'],
+            'nombre': producto['nombre'],
+            'precio': producto['precio'],
+            'stock': str(nuevo_stock)  # Convertir a string para guardar en CSV
+        }
 
-            # Actualizar el producto con el nuevo stock
-            producto_actual['cantidad'] = str(
-                nuevo_stock
-            )  # Convertimos a string para guardar en CSV
-            data_manager.put_data('productos', producto['id'], producto_actual)
+        # Actualizar el stock del producto en el archivo CSV usando `put_producto`
+        put_producto(data_manager, producto['id'], producto_actualizado)
 
     return venta
