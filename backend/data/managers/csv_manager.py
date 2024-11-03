@@ -20,6 +20,7 @@ class CSVManager(Manager):
         self.productos_file = self.data_dir / CSVModels.PRODUCTOS
         self.ventas_file = self.data_dir / CSVModels.VENTAS
         self.deudores_file = self.data_dir / CSVModels.DEUDORES
+        self.venta_productos_file = self.data_dir / CSVModels.VENTA_PRODUCTOS
 
         # Inicializar archivos CSV con columnas si no existen
         self._init_files()
@@ -27,7 +28,12 @@ class CSVManager(Manager):
     def _init_files(self):
         default_columns = {
             self.productos_file: ['id', 'nombre', 'descripcion', 'creacion'],
-            self.ventas_file: ['id', 'id_producto', 'cantidad', 'fecha_venta', 'ganancia'],
+            # self.ventas_file: ['id', 'id_producto', 'cantidad', 'fecha_venta', 'ganancia'],
+
+            # Actualizamos para solo contener la venta
+            self.ventas_file: ['id', 'fecha_venta', 'total_venta'],
+            self.venta_productos_file: ['id_venta', 'id_producto', 'cantidad'],
+
             self.deudores_file: ['id', 'nombre_cliente', 'valor_deuda', 'creacion'],
         }
         for file, columns in default_columns.items():
@@ -58,7 +64,7 @@ class CSVManager(Manager):
         file_path = getattr(self, f'{source}_file', None)
         if file_path:
             data = self._read_file(file_path)
-            item['id'] = (len(data) + 1)
+            item['id'] = len(data) + 1
             ##item['creacion'] = datetime.now().isoformat()
             data.append(item)
             self._write_file(file_path, data)
@@ -84,4 +90,3 @@ class CSVManager(Manager):
             self._write_file(file_path, data)
             return True
         raise ValueError(f"Source '{source}' not recognized.")
-    
