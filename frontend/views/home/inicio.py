@@ -18,7 +18,6 @@ def mostrar_inicio(page: ft.Page, data_manager: CSVManager):
                     ft.IconButton(
                         icon=ft.icons.ADD,
                         tooltip='Agregar historia',
-                        # on_click=handle_add_producto,
                     ),
                 ],
             ),
