@@ -31,7 +31,7 @@ class CSVManager(Manager):
             # self.ventas_file: ['id', 'id_producto', 'cantidad', 'fecha_venta', 'ganancia'],
 
             # Actualizamos para solo contener la venta
-            self.ventas_file: ['id', 'fecha_venta', 'total_venta'],
+            self.ventas_file: ['id', 'fecha_venta', 'ganancia'],
             self.venta_productos_file: ['id_venta', 'id_producto', 'cantidad'],
 
             self.deudores_file: ['id', 'nombre_cliente', 'valor_deuda', 'creacion'],

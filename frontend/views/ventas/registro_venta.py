@@ -166,7 +166,7 @@ def create_ventas(page: fl.Page, data_manager: CSVManager):
         if productos_venta:
             venta_data = {
                 'fecha_venta': datetime.now().isoformat(),
-                'total_venta': sum(v['cantidad'] * v['precio'] for v in productos_venta),
+                'ganancia': sum(v['cantidad'] * v['precio'] for v in productos_venta),
             }
             # Guardar la venta y productos asociados
             add_venta(
