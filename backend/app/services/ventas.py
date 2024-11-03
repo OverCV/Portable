@@ -1,7 +1,7 @@
 # backend/app/services/ventas.py
 
-from backend.data.manager import Manager
 from datetime import datetime
+from backend.data.manager import Manager
 from backend.app.services.productos import put_producto
 
 
@@ -20,7 +20,6 @@ def add_venta(data_manager: Manager, venta: dict, productos: list[dict]):
 
     # Registrar cada producto de la venta en 'venta_productos' y actualizar stock
     for producto in productos:
-        # Guardar el producto de la venta en 'venta_productos'
         venta_producto = {
             'id_venta': venta_id,
             'id_producto': producto['id'],
@@ -28,18 +27,24 @@ def add_venta(data_manager: Manager, venta: dict, productos: list[dict]):
         }
         data_manager.add_data('venta_productos', venta_producto)
 
-        # Calcular el nuevo stock sin volver a validar (asumimos que ya se verificó)
+        # Actualizar el stock del producto
         nuevo_stock = int(producto['stock']) - producto['cantidad']
-
-        # Crear un diccionario actualizado para el producto
         producto_actualizado = {
             'id': producto['id'],
             'nombre': producto['nombre'],
             'precio': producto['precio'],
-            'stock': str(nuevo_stock)  # Convertir a string para guardar en CSV
+            'stock': str(nuevo_stock),
         }
-
-        # Actualizar el stock del producto en el archivo CSV usando `put_producto`
         put_producto(data_manager, producto['id'], producto_actualizado)
 
     return venta
+
+
+def calcular_total_venta(productos_venta: list[dict]) -> float:
+    """Calcula el total de la venta en base a la lista de productos."""
+    return sum(venta['precio'] * venta['cantidad'] for venta in productos_venta)
+
+
+def filtrar_productos_con_stock(productos: list[dict]) -> list[dict]:
+    """Filtra productos con stock disponible."""
+    return [producto for producto in productos if int(producto['stock']) > 0]
