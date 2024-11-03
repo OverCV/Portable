@@ -1,6 +1,7 @@
 from typing import Callable
 import flet as fl
 from backend.data.managers.csv_manager import CSVManager
+from backend.data.managers.json_manager import JSONManager
 from frontend.enums.routes import Routes
 
 from frontend.views.productos.registro_producto import process_productos
@@ -12,9 +13,10 @@ from frontend.views.not_found import mostrar_404
 from frontend.enums.config import conf
 
 
-class InventoryApp:
+class Portalapp:
     def __init__(self):
-        self.data_manager = CSVManager()
+        self.sql_manager = CSVManager()
+        # self.nosql_manager = JSONManager()
 
     async def main(self, page: fl.Page):
         page.title = conf.APP_NAME
@@ -72,10 +74,10 @@ class InventoryApp:
             page.views.append(
                 all_routes[route](
                     page,
-                    self.data_manager,
+                    self.sql_manager,
                 )
                 if route in all_routes
-                else mostrar_404(page, self.data_manager)
+                else mostrar_404(page, self.sql_manager)
             )
 
             # Agregar la barra de navegación a todas las vistas
